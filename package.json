@@ -1,0 +1,47 @@
+{
+  "name": "ng-office-orders",
+  "version": "1.0.0",
+  "description": "Angular app for collecting office food and grocery orders",
+  "main": "index.js",
+  "dependencies": {
+    "angular": "^1.4.7",
+    "browserify": "^11.2.0"
+  },
+  "devDependencies": {
+    "babelify": "^6.3.0",
+    "clean-css": "^3.4.5",
+    "exorcist": "^0.4.0",
+    "node-sass": "^3.3.3",
+    "nodemon": "^1.7.1",
+    "uglify-js": "^2.4.24",
+    "watchify": "^3.4.0"
+  },
+  "scripts": {
+    "build": "browserify ./app/index.js -d | ./node_modules/.bin/exorcist public/js/app.js.map > public/js/app.js",
+    "watch": "watchify ./app/index.js -o './node_modules/.bin/exorcist public/js/app.js.map > public/js/app.js' -d -v",
+    "build-css": "node-sass ./public/scss/main.scss ./public/css/app.css",
+    "watch-css": "nodemon -e scss -x 'npm run build-css'",
+    "test": "npm run test"
+  },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/florapdx/ng-office-orders.git"
+  },
+  "keywords": [
+    "angular",
+    "office lunch",
+    "office ordering",
+    "food delivery"
+  ],
+  "author": "florapdx <fworley@quickleft.com> (https://sprint.ly)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/florapdx/ng-office-orders/issues"
+  },
+  "homepage": "https://github.com/florapdx/ng-office-orders#readme"
+}
