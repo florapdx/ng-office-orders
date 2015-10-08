@@ -1,7 +1,8 @@
 var Hapi = require('hapi');
 var hapiAuthCookie = require('hapi-auth-cookie');
 var good = require('good');
-var models = require('./models');
+var models = require('./service/models');
+var routes = require('./service/routes');
 
 var server = new Hapi.Server();
 
@@ -26,14 +27,7 @@ server.register([
     }
 });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function(request, reply) {
-        reply('');
-    }
-});
-
+server.route(routes);
 
 models.sequelize.sync().then(function() {
     server.start(function() {
