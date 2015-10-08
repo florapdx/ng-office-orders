@@ -1,6 +1,7 @@
 var Hapi = require('hapi');
 var hapiAuthCookie = require('hapi-auth-cookie');
 var good = require('good');
+var models = require('./models');
 
 var server = new Hapi.Server();
 
@@ -15,16 +16,9 @@ server.register([
         options: {
             reporters: [{
                 reporter: require('good-console'),
-                args: [{
-                    log: '*',
-                    response: '*',
-                    error: '*'
-                }]
+                events: {log: '*', response: '*', error: '*'}
             }]
         }
-    },
-    {
-        register: hapiAuthCookie,
     }
 ], function(err) {
     if (err) {
@@ -41,6 +35,8 @@ server.route({
 });
 
 
-server.start(function() {
-    console.log('Server running at:', server.info.url);
+models.sequelize.sync().then(function() {
+    server.start(function() {
+        console.log('Server running at:', server.info.uri);
+    });
 });
