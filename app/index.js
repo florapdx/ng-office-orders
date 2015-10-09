@@ -1,5 +1,8 @@
 import angular from 'angular';
-angular.module('officeOrderNG', []);
+import angularMaterial from 'angular-material';
 
-import './components';
+angular.module('officeOrderNG', [angularMaterial]);
+
+import './controllers';
 import './services';
+import './views';
