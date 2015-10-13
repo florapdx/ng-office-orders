@@ -12,6 +12,10 @@ const UserService = ($http) => {
             email: email
         });
     };
+
+    this.getUser = (userId) => {
+        return $http.get('/api/users/' + userId);
+    };
 };
 
 export default UserService;
