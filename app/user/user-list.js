@@ -2,17 +2,9 @@ import service from './service';
 
 const UserList = () => {
     return {
-        scope: {
-            'users': '@'
-        },
         controllerAs: 'userListCtrl',
         controller: () => {
-            service.getAllUsers().then(resp) => {
-                console.log("ALL_USERS: ", resp);
-                this.users = resp;
-            }.catch((err) => {
-                debugger;
-            }).bind(this);
+            service.getAllUsers();
         },
         templateUrl: './users.html'
         //template:
