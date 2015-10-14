@@ -4,38 +4,44 @@ const UserService = ($http) => {
     const _users = [];
     const _currentUser = {};
 
-    this.getAllUsers = () => {
-        return _users;
-    };
-
-    this.getUser = (userId) => {
-        _currentUser = _currentUser.id ? _currentUser : _users.filter((user) => {
-            return user.id === userId;
-        });
-        return _currentUser;
-    };
-
-    // unsure how I feel about this -- could be a separate service
-    this.api = {
-        fetchAllUsers = () =>
-            $http.get('/api/users').{then(resp) => {
-                console.log("ALL_USERS: ", resp);
-                _users = resp;
-            }.catch((err) => {
-                debugger;
-            });
+    return {
+        getAllUsers() {
+            return _users;
         },
 
-        createNewUser = (fName, lName, email) => {
-            return $http.post('/api/users', {
-                firstName: fName,
-                lastName: lName,
-                email: email
-            });
+        getUser() {
+            return _currentUser;
         },
 
-        fetchUser = (userId) => {
-            return $http.get('/api/users/' + userId);
+        // unsure how I feel about this -- could be a separate service
+        api() {
+            return {
+                fetchAllUsers() {
+                    debugger;
+                    $http.get('/api/users').then((resp) => {
+                        console.log("ALL_USERS: ", resp);
+                        debugger;
+                    }).catch((err) => {
+                        debugger;
+                    });
+                },
+
+                createNewUser(fName, lName, email) {
+                    $http.post('/api/users', {
+                        firstName: fName,
+                        lastName: lName,
+                        email: email
+                    }).then((resp) => {
+                        console.log("ADD USER: ", resp);
+                    }).catch((err) => {
+                        debugger;
+                    });
+                },
+
+                fetchUser(userId) {
+                    return $http.get('/api/users/' + userId);
+                }
+            }
         }
     }
 };

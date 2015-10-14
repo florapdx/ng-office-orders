@@ -1,13 +1,7 @@
+var Joi = require('joi');
 var api = require('./api');
 
 module.exports = [
-    {
-        method: 'GET',
-        path: '/',
-        handler: function(request, reply) {
-            reply().code(200);
-        }
-    },
     {
         method: 'GET',
         path: '/api/users',
@@ -25,10 +19,21 @@ module.exports = [
             handler: api.users.createUser,
             validate: {
                 payload: {
-                    firstName: Hapi.types.String().required(),
-                    lastName: Hapi.types.String().required(),
-                    email: Hapi.types.String().required()
+                    firstName: Joi.string().required().min(1),
+                    lastName: Joi.string().required().min(1),
+                    email: Joi.string().email().required()
                 }
+            }
+        }
+    },
+    { // handle static file requests
+        method: 'GET',
+        path: '/{param*}',
+        handler: {
+            directory: {
+                path: '.',
+                redirectToSlash: true,
+                index: true
             }
         }
     }

@@ -1,8 +1,15 @@
 import angular from 'angular';
-import angularMaterial from 'angular-material';
+//import angularMaterial from 'angular-material';
 
-angular.module('officeOrderNG', [angularMaterial]);
+let app = angular.module('officeOrderNG', [require('angular-route')]);
 
-import './controllers';
-import './services';
-import './views';
+require('./user');
+
+app.config(['$routeProvider',
+    function($routeProvider) {
+        $routeProvider.
+            when('/', {
+                templateUrl: 'home.html'
+            })
+    }
+]);

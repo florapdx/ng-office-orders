@@ -1,12 +1,10 @@
-import service from './service';
-
 const UserList = () => {
     return {
         controllerAs: 'userListCtrl',
-        controller: () => {
-            service.getAllUsers();
+        controller: (UserService) => {
+            UserService.getAllUsers();
         },
-        templateUrl: './users.html'
+        templateUrl: './user-list.html'
         //template:
         // '<ul ng-repeat="user in userCtrl.users">
         //     <li>

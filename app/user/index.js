@@ -1,6 +1,10 @@
 import angular from 'angular';
+import service from './service';
 import UserList from './user-list';
 import UserProfile from './user-profile';
 
-angular.directive('UserList', UserList);
-angular.directive('UserProfile', UserProfile);
+let app = angular.module('officeOrderNG');
+
+app.factory('UserService', service);
+app.directive('userList', UserList);
+app.directive('userProfile', UserProfile);
