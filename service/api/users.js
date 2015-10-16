@@ -1,4 +1,4 @@
-var User = require('../models/user');
+var User = require('../models').User;
 
 module.exports = {
     all: function(request, reply) {

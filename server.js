@@ -1,6 +1,5 @@
 var Path = require('path');
 var Hapi = require('hapi');
-var hapiAuthCookie = require('hapi-auth-cookie');
 var good = require('good');
 var inert = require('inert');
 var models = require('./service/models');
