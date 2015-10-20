@@ -1,20 +1,16 @@
 const UserList = () => {
     return {
+        scope: {
+            users: '=users'
+        },
         controllerAs: 'userListCtrl',
+        bindToController: true,
         controller: (UserService) => {
             return {
                 users: UserService.getAllUsers()
             };
         },
-        //templateUrl: 'user-list.html',
-        template:
-            '<ul ng-repeat="user in userListCtrl.users">' +
-               '<li>' +
-                '<img ng-src="{{user.avatar}}" />' +
-                   '<span>{{user.firstName}} {{user.lastName}}</span>' +
-                    '<span>{{user.email}}</span>' +
-                '</li>' +
-           '</ul>'
+        templateUrl: 'user-list.html'
     };
 };
 
